@@ -7,7 +7,19 @@ const overlay = document.getElementById('overlay');
 const productGrid = document.getElementById('product-grid');
 const cartSubtotal = document.getElementById('cart-subtotal');
 const clearCartButton = document.getElementById('clear-cart');
+const promoCodeInput = document.getElementById('promo-code-input');
+const applyPromoButton = document.getElementById('apply-promo');
+const discountDisplay = document.getElementById('discount-display');
+const finalTotalDisplay = document.getElementById('final-total');
 let cart = [];
+let appliedPromoCode = null;
+promoCodeInput.value = '';
+
+// Available promo codes
+const promoCodes = {
+  ostad10: 0.1,
+  ostad5: 0.05,
+};
 
 // Fetch and display products
 async function fetchProducts() {
@@ -93,6 +105,8 @@ function updateCart() {
     cartCount.innerText = '0';
     clearCartButton.style.display = 'none';
     cartSummary.style.display = 'none';
+    discountDisplay.innerText = '$0.00';
+    finalTotalDisplay.innerText = '$0.00';
   } else {
     cartSummary.style.display = 'block';
     clearCartButton.style.display = 'block';
@@ -139,7 +153,32 @@ function updateCart() {
 
   cartCount.innerText = totalItems;
   cartSubtotal.innerText = subtotal.toFixed(2);
+
+  // Calculate discount and final total
+  const discount = appliedPromoCode ? subtotal * promoCodes[appliedPromoCode] : 0;
+  const finalTotal = subtotal - discount;
+
+  discountDisplay.innerText = `${discount.toFixed(2)}`;
+  finalTotalDisplay.innerText = `${finalTotal.toFixed(2)}`;
 }
+
+// Apply promo code
+applyPromoButton.addEventListener('click', () => {
+  const promoCode = promoCodeInput.value.trim();
+
+  if (appliedPromoCode) {
+    alert('A promo code has already been applied.');
+    return;
+  }
+
+  if (promoCodes.hasOwnProperty(promoCode)) {
+    appliedPromoCode = promoCode;
+    updateCart();
+    alert('Promo code applied successfully!');
+  } else {
+    alert('Invalid promo code. Please try again.');
+  }
+});
 
 // Toggle cart sidebar
 cartButton.addEventListener('click', () => {
@@ -178,6 +217,8 @@ function removeItem(index) {
 // Clear cart
 clearCartButton.addEventListener('click', () => {
   cart = [];
+  appliedPromoCode = null;
+  promoCodeInput.value = '';
   updateCart();
 });
 

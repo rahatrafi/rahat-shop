@@ -120,8 +120,8 @@ body {
   margin-right: 10px;
 }
 
-/* Remove, Clear, Checkout Buttons */
-.remove-btn, .clear-btn, .checkout-btn {
+/* Remove, Clear, Checkout, Promo Buttons */
+.remove-btn, .clear-btn, .checkout-btn, .promo-btn {
   background-color: var(--accent-color);
   color: #e5e5e5;
   cursor: pointer;
@@ -133,7 +133,7 @@ body {
   color: var(--primary-color);
 }
 
-.remove-btn:hover, .clear-btn:hover {
+.remove-btn:hover, .clear-btn:hover, .promo-btn:hover {
   color: var(--primary-color);
   background-color: var(--accent-color);
 }
