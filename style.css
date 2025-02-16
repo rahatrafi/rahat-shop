@@ -84,7 +84,7 @@ body {
 
 .add-to-cart:hover, .cart-btn:hover, .quantity-controls button:hover {
   background-color: var(--accent-color);
-  color: #fff;
+  color: var(--bg-color);
 }
 
 /* Cart Sidebar */
@@ -120,7 +120,7 @@ body {
   margin-right: 10px;
 }
 
-/* Remove and Clear Buttons */
+/* Remove, Clear, Checkout Buttons */
 .remove-btn, .clear-btn, .checkout-btn {
   background-color: var(--accent-color);
   color: #e5e5e5;
@@ -128,9 +128,19 @@ body {
   transition: background-color 0.3s;
 }
 
-.remove-btn:hover, .clear-btn:hover, .checkout-btn:hover {
+.checkout-btn {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+.remove-btn:hover, .clear-btn:hover {
   color: var(--primary-color);
   background-color: var(--accent-color);
+}
+
+.checkout-btn:hover {
+  color: var(--bg-color);
+  background-color: var(--primary-color);
 }
 
 /* Close Button */
